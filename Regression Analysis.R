@@ -2,8 +2,13 @@
 #Probit estimates for the paper "Who Holds the Keys? Gender and Homeownership Among Single Adults in the United States"
 #Date: 11-23-2026
 #Written for RStudio
-#This file estimates the probit models and creates the regression table.
+#This file estimates the probit models (Table 4) and the predicted probabilities (point estimates)
+#in Table 5, Panel A, and creates the regression table.
 #It uses the analysis data created by "Data Construction.R" (2022 Survey of Consumer Finances).
+#Credit: the probit estimation with glm, McFadden's pseudo R-squared, the average partial
+#effects, and the OLS comparison follow Lecture 11 and its R notebook from Professor James
+#Saunoris. The steps for the five implicates and the 999 replicate weights follow the SCF
+#documentation from the Federal Reserve.
 
 #Remove all objects from the global environment
 rm(list = ls())
@@ -13,13 +18,11 @@ rm(list = ls())
 
 # Install the following packages prior to using this script file:
 if(!require("sandwich")) install.packages("sandwich")
-if(!require("lmtest")) install.packages("lmtest")
 if(!require("car")) install.packages("car")
 if(!require("haven")) install.packages("haven")
 
 # Load the following packages
 library("sandwich")  # robust standard errors
-library("lmtest")    # coefficient tests
 library("car")       # variance inflation factors
 library("haven")     # for reading the Stata file with the replicate weights
 
@@ -332,7 +335,7 @@ html <- c(
   "<html><head><style>td {padding: 1px 12px}</style></head>",
   "<body style='font-family: Times New Roman; font-size: 12pt'>",
   "<table style='border-collapse: collapse; text-align: center'>",
-  "<caption style='text-align:left'><b>Table 4: Probit estimates of homeownership</b><br>",
+  "<caption style='text-align:left'><b>Table 4: Probit and OLS estimates of homeownership</b><br>",
   "Dependent variable: Homeowner (1 = owns primary residence)</caption>",
   "<tr style='border-top: 2px solid black; border-bottom: 1px solid black'><td></td>",
   paste0("<td>", column_names, "</td>", collapse = ""), "</tr>",

@@ -7,7 +7,7 @@ Author: Khongorzul Tseesuren, Eastern Michigan University
 ## Scripts
 
 1. `Data Construction.R` reads the SCF Summary Extract and the detailed marital status (X8023) from the Full Public Data Set, merges them by row ID, checks the data (row counts, missing values, duplicates, weight totals, the weighted homeownership rate), keeps families without a partner and with positive income, creates the analysis variables, and saves `Analysis Data/scfdata.RData`.
-2. `Regression Analysis.R` estimates the probit models (Table 4 of the paper) on each of the five implicates with the SCF weight, computes standard errors from the 999 SCF replicate weights combined with the imputation variance, and computes average partial effects and predicted probabilities (Table 5, Panel A). It also runs the robustness checks (linear probability model, without incomes of $1 million or more, robust standard errors) and writes the regression table and a text file of all results.
+2. `Regression Analysis.R` estimates the probit models (Table 4 of the paper) on each of the five implicates with the SCF weight, computes standard errors from the 999 SCF replicate weights combined with the imputation variance, and computes average partial effects and the predicted probabilities (point estimates) in Table 5, Panel A. It also runs the robustness checks (linear probability model, without incomes of $1 million or more, robust standard errors) and writes the regression table and a text file of all results.
 
 ## Data (not included in this repository)
 
@@ -28,12 +28,16 @@ project-folder/
   Documents/         regression_table.html and Regression_output.txt
 ```
 
-Set the working directory to `project-folder/` before running.
+Create the empty folders `Analysis Data/` and `Documents/` before running, and set the working directory to `project-folder/`.
 
 ## How to run
 
 Run `Data Construction.R` first, then `Regression Analysis.R`. The second script takes a few minutes, because each model is estimated 999 times with the replicate weights.
 
+## Credit
+
+In `Regression Analysis.R`, the probit estimation with `glm`, McFadden's pseudo R-squared, the average partial effects, and the OLS comparison follow Lecture 11 and its R notebook from Professor James Saunoris. The steps for the five implicates and the 999 replicate weights follow the SCF documentation from the Federal Reserve.
+
 ## R packages
 
-dplyr, labelled, haven, sandwich, lmtest, car
+dplyr, labelled, haven, sandwich, car

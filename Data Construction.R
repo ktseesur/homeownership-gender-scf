@@ -7,7 +7,7 @@
 rm(list = ls())
 
 # Set working directory (should be set to the main project folder)
-# setwd("path/to/project-folder")  # the folder that contains Original Data/, Analysis Data/ and Documents/
+# setwd("path/to/project-folder")  # the folder that contains Original Data/ and Analysis Data/
 
 # Install the following packages prior to using this script file:
 if(!require("dplyr")) install.packages("dplyr")
